@@ -1,5 +1,5 @@
 <template>
-  <div class="px-6 py-8 max-w-2xl">
+  <div class="px-6 py-8 max-w-4xl">
     <div ref="contentDiv" id="content-div"></div>
   </div>
 </template>
