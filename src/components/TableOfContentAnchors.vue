@@ -1,12 +1,18 @@
 <template>
   <div v-for="anchor in anchors" :key="anchor.name" class="anchor">
-    <component :is="`h${level}`" :style="`margin-left: ${0.8 * level}rem`">{{
-      anchor.name
-    }}</component>
+    <router-link
+      :to="`/docs/a/en/${tag}/${page}${level > 1 ? `#${anchor.name}` : ''}`"
+    >
+      <component :is="`h${level}`" :style="`margin-left: ${0.8 * level}rem`">{{
+        anchor.name
+      }}</component>
+    </router-link>
     <table-of-content-anchors
       v-if="anchor.children"
       :anchors="anchor.children"
       :level="level + 1"
+      :tag="tag"
+      :page="page"
     />
   </div>
 </template>
@@ -24,6 +30,14 @@ export default defineComponent({
     level: {
       type: Number,
       default: 1
+    },
+    page: {
+      type: String,
+      required: true
+    },
+    tag: {
+      type: String,
+      required: true
     }
   }
 });

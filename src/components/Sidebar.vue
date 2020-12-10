@@ -1,11 +1,12 @@
 <template>
-  <div class="w-80">
-    <table-of-content v-if="articles" :articles="articles" />
+  <div class="w-80 flex-shrink-0">
+    <table-of-content v-if="articles" :articles="articles" :tag="tag" />
   </div>
 </template>
 
 <script>
 import { defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
 import TableOfContent from "../components/TableOfContent.vue";
 
 export default defineComponent({
@@ -14,6 +15,8 @@ export default defineComponent({
   },
   setup() {
     const articles = ref(null);
+    const tag = ref(null);
+    const router = useRouter();
 
     fetch(`${process.env.API_URL}/docs`, { mode: "cors" })
       .then(res => res.json())
@@ -24,9 +27,13 @@ export default defineComponent({
         }
 
         articles.value = data?.articles;
+        tag.value = data?.tag;
+        router.push({
+          path: `/docs/a/en/${tag.value}/${articles.value[0].name}`
+        });
       });
 
-    return { articles };
+    return { articles, tag };
   }
 });
 </script>
