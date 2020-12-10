@@ -1,32 +1,17 @@
 <template>
-  <div>
-    <table-of-content v-if="articles" :articles="articles" />
+  <div class="flex">
+    <sidebar />
+    <div>content</div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import TableOfContent from "../components/TableOfContent.vue";
+import { defineComponent } from "vue";
+import Sidebar from "../components/Sidebar.vue";
 
 export default defineComponent({
   components: {
-    TableOfContent
-  },
-  setup() {
-    const articles = ref(null);
-
-    fetch(`${process.env.API_URL}/docs`, { mode: "cors" })
-      .then(res => res.json())
-      .then(json => {
-        const { code, data } = json;
-        if (code !== 200) {
-          return;
-        }
-
-        articles.value = data?.articles;
-      });
-
-    return { articles };
+    Sidebar
   }
 });
 </script>
