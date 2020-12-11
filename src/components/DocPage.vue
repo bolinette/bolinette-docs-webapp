@@ -42,18 +42,22 @@ export default defineComponent({
 
 <style scoped>
 #content-div >>> h1 {
-  @apply text-2xl mb-2 mt-8;
+  @apply text-2xl mb-2 mt-6;
 }
 
 #content-div >>> h2 {
-  @apply text-xl mb-2 mt-8;
+  @apply text-xl mb-2 mt-3;
 }
 
 #content-div >>> p {
-  @apply text-gray-500 mb-2;
+  @apply text-gray-500 mb-4;
 }
 
 #content-div >>> pre > code {
   @apply text-sm;
+}
+
+#content-div >>> code:not([class^="language"]) {
+  @apply bg-red-100 text-red-700 px-1 rounded-sm font-semibold whitespace-nowrap;
 }
 </style>
