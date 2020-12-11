@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Inter", "Arial", "sans-serif"]
+      },
+      colors: {
+        ideDark: "#23241f"
       }
     }
   },
