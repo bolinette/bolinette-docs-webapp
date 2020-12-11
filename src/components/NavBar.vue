@@ -8,7 +8,9 @@
       >olinette
     </div>
     <div class="mr-4">
-      <svg-icon class="text-white" type="mdi" :path="mdiGithub"></svg-icon>
+      <a :href="githubUrl" target="_blank">
+        <svg-icon class="text-white" type="mdi" :path="mdiGithub"></svg-icon>
+      </a>
     </div>
   </div>
 </template>
@@ -20,7 +22,8 @@ import { defineComponent } from "vue";
 export default defineComponent({
   setup() {
     return {
-      mdiGithub
+      mdiGithub,
+      githubUrl: process.env.GITHUB_URL
     };
   }
 });
