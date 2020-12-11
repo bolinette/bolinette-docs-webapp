@@ -44,6 +44,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.anchor {
+  @apply whitespace-nowrap;
+}
+
 .anchor h1 {
   @apply uppercase font-semibold text-xs text-gray-900 py-1;
 }
