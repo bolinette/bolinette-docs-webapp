@@ -1,6 +1,8 @@
 <template>
-  <div class="px-6 py-8 max-w-4xl">
-    <div ref="contentDiv" id="content-div"></div>
+  <div class="h-full w-full overflow-y-auto px-6 py-8">
+    <div class="max-w-4xl">
+      <div ref="contentDiv" id="content-div"></div>
+    </div>
   </div>
 </template>
 
@@ -49,5 +51,9 @@ export default defineComponent({
 
 #content-div >>> p {
   @apply text-gray-500 mb-2;
+}
+
+#content-div >>> pre > code {
+  @apply text-sm;
 }
 </style>
