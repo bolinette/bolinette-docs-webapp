@@ -16,20 +16,27 @@ export default defineComponent({
     const contentDiv = ref(null);
     const route = useRoute();
 
+    const fetchPage = url => {
+      fetch(url)
+        .then(res => res.json())
+        .then(json => {
+          contentDiv.value.innerHTML = json.data.html;
+          return nextTick;
+        })
+        .then(() => {
+          contentDiv.value.querySelectorAll("pre code").forEach(block => {
+            hljs.highlightBlock(block);
+          });
+        });
+    };
+
+    if (route.params.catchAll) {
+      fetchPage(`${process.env.API_URL}/docs/${route.params.catchAll}`);
+    }
     watch(
       () => route.params,
       newParams => {
-        fetch(`${process.env.API_URL}/docs/${newParams.catchAll}`)
-          .then(res => res.json())
-          .then(json => {
-            contentDiv.value.innerHTML = json.data.html;
-            return nextTick;
-          })
-          .then(() => {
-            contentDiv.value.querySelectorAll("pre code").forEach(block => {
-              hljs.highlightBlock(block);
-            });
-          });
+        fetchPage(`${process.env.API_URL}/docs/${newParams.catchAll}`);
       }
     );
 

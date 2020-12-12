@@ -1,7 +1,11 @@
 <template>
   <div v-for="anchor in anchors" :key="anchor.name" class="anchor">
     <router-link
-      :to="`/docs/a/en/${tag}/${page}${level > 1 ? `#${anchor.name}` : ''}`"
+      :to="
+        `/docs/a/en/${articlesProvider.tag}/${page}${
+          level > 1 ? `#${anchor.name}` : ''
+        }`
+      "
     >
       <component :is="`h${level}`" :style="`margin-left: ${0.8 * level}rem`">{{
         anchor.name
@@ -11,7 +15,6 @@
       v-if="anchor.children"
       :anchors="anchor.children"
       :level="level + 1"
-      :tag="tag"
       :page="page"
     />
   </div>
@@ -34,12 +37,9 @@ export default defineComponent({
     page: {
       type: String,
       required: true
-    },
-    tag: {
-      type: String,
-      required: true
     }
-  }
+  },
+  inject: ["articlesProvider"]
 });
 </script>
 
