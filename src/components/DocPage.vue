@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full overflow-y-auto px-6 py-8">
+  <div class="h-full w-full overflow-y-auto px-6 pb-8 pt-0 sm:pt-2">
     <div class="mx-auto max-w-4xl">
       <div ref="contentDiv" id="content-div"></div>
     </div>
