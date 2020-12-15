@@ -50,10 +50,10 @@ export default defineComponent({
 }
 
 .anchor h1 {
-  @apply uppercase font-semibold text-xs text-gray-900 py-1;
+  @apply uppercase font-semibold mb-4 sm:mb-0 text-xl sm:text-xs text-gray-800 py-1;
 }
 
 .anchor h2 {
-  @apply transition-colors duration-200 hover:text-gray-900 text-gray-500 py-1 text-sm;
+  @apply transition-colors duration-200 hidden sm:block text-sm hover:text-gray-800 text-gray-500 py-1;
 }
 </style>

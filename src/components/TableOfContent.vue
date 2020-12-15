@@ -1,5 +1,5 @@
 <template>
-  <div class="px-2 py-8 h-full">
+  <div class="px-2 py-8 h-full text-center sm:text-left">
     <div v-for="article in articles" :key="article.name">
       <table-of-content-anchors
         :page="article.name"

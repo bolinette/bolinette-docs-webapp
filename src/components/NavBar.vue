@@ -7,22 +7,31 @@
         >B</span
       >olinette
     </div>
-    <div class="mr-4">
-      <a :href="githubUrl" target="_blank">
-        <svg-icon class="text-white" type="mdi" :path="mdiGithub"></svg-icon>
+    <div class="mr-4 text-white">
+      <div class="sm:hidden cursor-pointer">
+        <svg-icon type="mdi" :path="mdiMenu"></svg-icon>
+      </div>
+      <a class="hidden sm:block" :href="githubUrl" target="_blank">
+        <svg-icon type="mdi" :path="mdiGithub"></svg-icon>
       </a>
     </div>
   </div>
+  <mobile-menu class="sm:hidden" />
 </template>
 
 <script>
-import { mdiGithub } from "@mdi/js";
+import { mdiGithub, mdiMenu } from "@mdi/js";
 import { defineComponent } from "vue";
+import MobileMenu from "./MobileMenu";
 
 export default defineComponent({
+  components: {
+    MobileMenu
+  },
   setup() {
     return {
       mdiGithub,
+      mdiMenu,
       githubUrl: process.env.GITHUB_URL
     };
   }
