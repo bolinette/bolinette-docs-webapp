@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import TableOfContentAnchors from "./TableOfContentAnchors.vue";
-import { articles } from "@/providers/articles";
+import { articles } from "@/composables/articles";
 
 export default defineComponent({
   components: {

@@ -9,7 +9,7 @@
 import { defineComponent } from "vue";
 import Sidebar from "../components/Sidebar.vue";
 import DocPage from "../components/DocPage.vue";
-import { fetchArticles } from "@/providers/articles";
+import { fetchArticles } from "@/composables/articles";
 import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({

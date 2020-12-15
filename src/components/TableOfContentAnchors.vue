@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { tag } from "@/providers/articles";
+import { tag } from "@/composables/articles";
 
 export default defineComponent({
   name: "TableOfContentAnchors",
