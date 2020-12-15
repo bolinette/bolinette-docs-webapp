@@ -9,6 +9,7 @@
 <script>
 import { defineComponent, watch, ref, nextTick } from "vue";
 import { useRoute } from "vue-router";
+import { closeMobileMenu } from "@/composables/mobileMenu";
 import hljs from "highlight.js";
 
 export default defineComponent({
@@ -37,6 +38,7 @@ export default defineComponent({
       () => route.params,
       newParams => {
         fetchPage(`${process.env.API_URL}/docs/${newParams.catchAll}`);
+        closeMobileMenu();
       }
     );
 

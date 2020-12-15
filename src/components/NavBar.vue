@@ -9,20 +9,25 @@
     </div>
     <div class="mr-4 text-white">
       <div class="sm:hidden cursor-pointer">
-        <svg-icon type="mdi" :path="mdiMenu"></svg-icon>
+        <svg-icon
+          type="mdi"
+          :path="isMobileMenuOpen ? mdiClose : mdiMenu"
+          @click="toggleMobileMenu"
+        />
       </div>
       <a class="hidden sm:block" :href="githubUrl" target="_blank">
         <svg-icon type="mdi" :path="mdiGithub"></svg-icon>
       </a>
     </div>
   </div>
-  <mobile-menu class="sm:hidden" />
+  <mobile-menu v-if="isMobileMenuOpen" class="sm:hidden" />
 </template>
 
 <script>
-import { mdiGithub, mdiMenu } from "@mdi/js";
+import { mdiGithub, mdiMenu, mdiClose } from "@mdi/js";
 import { defineComponent } from "vue";
 import MobileMenu from "./MobileMenu";
+import { isMobileMenuOpen, toggleMobileMenu } from "@/composables/mobileMenu";
 
 export default defineComponent({
   components: {
@@ -32,7 +37,10 @@ export default defineComponent({
     return {
       mdiGithub,
       mdiMenu,
-      githubUrl: process.env.GITHUB_URL
+      mdiClose,
+      githubUrl: process.env.GITHUB_URL,
+      isMobileMenuOpen,
+      toggleMobileMenu
     };
   }
 });
