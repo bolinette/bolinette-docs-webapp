@@ -1,6 +1,20 @@
 import { ref } from "vue";
 
-const articles = ref([]);
+interface Article {
+  lang: string;
+  name: string;
+  position: number;
+  anchors: Anchor[];
+}
+
+interface Anchor {
+  name: string;
+  tag: string;
+  position: number;
+  children: Anchor[];
+}
+
+const articles = ref<Article[]>([]);
 const tag = ref("");
 
 const fetchArticles = async () => {
@@ -11,9 +25,9 @@ const fetchArticles = async () => {
     return { articles: [], tag: "" };
   }
 
-  articles.value = data?.articles;
+  articles.value = data?.articles as Article[];
   tag.value = data?.tag;
-  return { articles: articles.value as any, tag: tag.value };
+  return { articles: articles.value, tag: tag.value };
 };
 
 export { articles, tag, fetchArticles };
