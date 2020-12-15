@@ -1,11 +1,7 @@
 <template>
   <div v-for="anchor in anchors" :key="anchor.name" class="anchor">
     <router-link
-      :to="
-        `/docs/a/en/${articlesProvider.tag}/${page}${
-          level > 1 ? `#${anchor.name}` : ''
-        }`
-      "
+      :to="`/docs/a/en/${tag}/${page}${level > 1 ? `#${anchor.name}` : ''}`"
     >
       <component :is="`h${level}`" :style="`margin-left: ${0.8 * level}rem`">{{
         anchor.name
@@ -22,6 +18,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { tag } from "@/providers/articles";
 
 export default defineComponent({
   name: "TableOfContentAnchors",
@@ -39,7 +36,11 @@ export default defineComponent({
       required: true
     }
   },
-  inject: ["articlesProvider"]
+  setup() {
+    return {
+      tag
+    };
+  }
 });
 </script>
 

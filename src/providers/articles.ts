@@ -1,4 +1,4 @@
-import { readonly, ref } from "vue";
+import { ref } from "vue";
 
 const articles = ref([]);
 const tag = ref("");
@@ -16,8 +16,4 @@ const fetchArticles = async () => {
   return { articles: articles.value as any, tag: tag.value };
 };
 
-export const articlesProvider = readonly({
-  articles,
-  tag,
-  fetchArticles
-});
+export { articles, tag, fetchArticles };

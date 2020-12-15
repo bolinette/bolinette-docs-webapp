@@ -9,7 +9,7 @@
 import { defineComponent } from "vue";
 import Sidebar from "../components/Sidebar.vue";
 import DocPage from "../components/DocPage.vue";
-import { articlesProvider } from "@/providers/articles";
+import { fetchArticles } from "@/providers/articles";
 import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({
@@ -17,16 +17,11 @@ export default defineComponent({
     Sidebar,
     DocPage
   },
-  provide() {
-    return {
-      articlesProvider
-    };
-  },
   setup() {
     const router = useRouter();
     const route = useRoute();
 
-    const fetchPromise = articlesProvider.fetchArticles();
+    const fetchPromise = fetchArticles();
 
     if (!route.params.catchAll) {
       fetchPromise.then(({ articles, tag }) => {
