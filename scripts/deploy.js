@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
 const { NodeSSH } = require("node-ssh");
+require("dotenv").config();
 
 const ssh = new NodeSSH();
 

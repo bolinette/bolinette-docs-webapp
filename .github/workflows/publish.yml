@@ -17,17 +17,16 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Install and build
-        env:
-          API_URL: https://api.docs.bolinette.org
-          GITHUB_URL: https://github.com/bolinette/bolinette
         run: |
+          touch .env
+          echo API_URL=https://api.docs.bolinette.org >> .env
+          echo GITHUB_URL=https://github.com/bolinette/bolinette >> .env
+          echo SSH_USERNAME=${{ secrets.PYPI_USERNAME }} >> .env
+          echo SSH_PASSWORD=${{ secrets.PYPI_PASSWORD }} >> .env
           npm ci
           npm run build
       - name: Lint
         run: npm run lint
       - name: Deploy
-        env:
-          SSH_USERNAME: ${{ secrets.PYPI_USERNAME }}
-          SSH_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
           node scripts/deploy.js
