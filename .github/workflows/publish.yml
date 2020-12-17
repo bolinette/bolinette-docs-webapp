@@ -21,8 +21,9 @@ jobs:
           touch .env
           echo API_URL=https://api.docs.bolinette.org >> .env
           echo GITHUB_URL=https://github.com/bolinette/bolinette >> .env
-          echo SSH_USERNAME=${{ secrets.PYPI_USERNAME }} >> .env
-          echo SSH_PASSWORD=${{ secrets.PYPI_PASSWORD }} >> .env
+          echo SSH_HOST=${{ secrets.SSH_HOST }} >> .env
+          echo SSH_USER=${{ secrets.SSH_USER }} >> .env
+          echo SSH_PRIVATE_KEY=${{ secrets.SSH_PRIVATE_KEY }} >> .env
           npm ci
           npm run build
       - name: Lint

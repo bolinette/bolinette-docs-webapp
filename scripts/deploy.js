@@ -8,9 +8,9 @@ const ssh = new NodeSSH();
 const publish = async () => {
   try {
     await ssh.connect({
-      host: "pierrechat.com",
-      username: process.env.SSH_USERNAME,
-      password: process.env.SSH_PASSWORD
+      host: process.env.SSH_HOST,
+      username: process.env.SSH_USER,
+      privateKey: process.env.SSH_PRIVATE_KEY
     });
     await ssh.putDirectory(
       path.join(__dirname, "..", "dist"),
