@@ -1,0 +1,32 @@
+name: Publish Bolinette website to server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [14]
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install and build
+        env:
+          API_URL: https://api.docs.bolinette.org
+          GITHUB_URL: https://github.com/bolinette/bolinette
+        run: |
+          npm ci
+          npm run build
+      - name: Lint
+        run: npm run lint
+      - name: Deploy
+        env:
+          SSH_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          SSH_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          node scripts/deploy.js
