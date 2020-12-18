@@ -10,16 +10,17 @@ const publish = async () => {
     username: process.env.SSH_USER,
     privateKey: process.env.SSH_PRIVATE_KEY
   });
-  
-  // await ssh.putDirectory(
-  //   path.join(__dirname, "..", "dist"),
-  //   "www/bolinette.org/docs",
-  //   {
-  //     recursive: true,
-  //     concurrency: 3
-  //   }
-  // );
+
+  await ssh.putDirectory(
+    path.join(__dirname, "..", "dist"),
+    "www/bolinette.org/docs",
+    {
+      recursive: true,
+      concurrency: 3
+    }
+  );
   console.log("Successfully copied files");
+  ssh.dispose();
 };
 
 publish();
