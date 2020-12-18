@@ -19,7 +19,7 @@ jobs:
       - name: Install and build
         run: |
           touch .env
-          echo API_URL=https://api.docs.bolinette.org >> .env
+          echo API_URL=https://api.docs.bolinette.org/api >> .env
           echo GITHUB_URL=https://github.com/bolinette/bolinette >> .env
           npm ci
           npm run build
