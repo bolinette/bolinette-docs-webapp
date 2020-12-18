@@ -27,6 +27,6 @@ jobs:
         run: npm run lint
       - name: Deploy
         run: |
-          touch ~/id_rsa
-          echo -e ${{ secrets.SSH_PRIVATE_KEY }} >> ~/id_rsa
-          scp -i ~/id_rsa -r ./dist ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:www/bolinette.org/docs
+          touch ./id_rsa
+          echo -e ${{ secrets.SSH_PRIVATE_KEY }} >> ./id_rsa
+          scp -i ./id_rsa -r ./dist ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:www/bolinette.org/docs
