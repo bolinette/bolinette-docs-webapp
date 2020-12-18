@@ -15,8 +15,8 @@ const publish = async () => {
     path.join(__dirname, "..", "dist"),
     "www/bolinette.org/docs",
     {
-      recursive: false,
-      concurrency: 2
+      recursive: true,
+      concurrency: 1
     }
   );
   console.log("Successfully copied files");
