@@ -16,7 +16,14 @@ const publish = async () => {
     "www/bolinette.org/docs",
     {
       recursive: true,
-      concurrency: 1
+      concurrency: 1,
+      tick: (localPath, remotePath, error) => {
+        if (error) {
+          console.log(`Successfully copied ${localPath}`);
+        } else {
+          console.error(`Error copying ${localPath}`);
+        }
+      }
     }
   );
   console.log("Successfully copied files");
