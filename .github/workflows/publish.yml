@@ -26,7 +26,10 @@ jobs:
       - name: Lint
         run: npm run lint
       - name: Deploy
-        run: |
-          touch ./id_rsa
-          echo -e ${{ secrets.SSH_PRIVATE_KEY }} >> ./id_rsa
-          scp -i ./id_rsa -r ./dist ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:www/bolinette.org/docs
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: ./dist
+          remote: www/bolinette.org/docs
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
