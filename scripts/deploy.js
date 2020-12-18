@@ -19,9 +19,9 @@ const publish = async () => {
       concurrency: 1,
       tick: (localPath, remotePath, error) => {
         if (error) {
-          console.log(`Successfully copied ${localPath}`);
+          console.error(`Error copying ${localPath}: ${error}`);
         } else {
-          console.error(`Error copying ${localPath}`);
+          console.log(`Successfully copied ${localPath}`);
         }
       }
     }
