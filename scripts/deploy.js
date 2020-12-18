@@ -15,7 +15,7 @@ const publish = async () => {
     path.join(__dirname, "..", "dist"),
     "www/bolinette.org/docs",
     {
-      recursive: false,
+      recursive: true,
       concurrency: 1,
       tick: (localPath, remotePath, error) => {
         if (error) {
