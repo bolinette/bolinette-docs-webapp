@@ -10,6 +10,7 @@
 import { defineComponent, watch, ref, nextTick } from "vue";
 import { useRoute } from "vue-router";
 import { closeMobileMenu } from "@/composables/mobileMenu";
+import { tag } from "@/composables/articles";
 import hljs from "highlight.js";
 
 export default defineComponent({
@@ -31,13 +32,17 @@ export default defineComponent({
         });
     };
 
-    if (route.params.catchAll) {
-      fetchPage(`${process.env.API_URL}/docs/${route.params.catchAll}`);
+    if (route.params.article) {
+      fetchPage(
+        `${process.env.API_URL}/docs/a/en/${tag.value}/${route.params.article}`
+      );
     }
     watch(
       () => route.params,
       newParams => {
-        fetchPage(`${process.env.API_URL}/docs/${newParams.catchAll}`);
+        fetchPage(
+          `${process.env.API_URL}/docs/a/en/${tag.value}/${newParams.article}`
+        );
         closeMobileMenu();
       }
     );

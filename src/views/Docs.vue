@@ -24,8 +24,8 @@ export default defineComponent({
     const fetchPromise = fetchArticles();
 
     if (!route.params.catchAll) {
-      fetchPromise.then(({ articles, tag }) => {
-        router.push({ path: `/docs/a/en/${tag}/${articles[0].name}` });
+      fetchPromise.then(({ articles }) => {
+        router.push({ path: `/docs/${articles[0].name}` });
       });
     }
   }
