@@ -13,6 +13,7 @@
     "core-js": "^3.8.1",
     "highlight.js": "^10.4.1",
     "vue": "^3.0.4",
+    "vue-loading-spinner": "^1.0.11",
     "vue-router": "^4.0.1"
   },
   "devDependencies": {
