@@ -62,8 +62,25 @@ export default defineComponent({
   @apply text-xl mb-2 mt-3;
 }
 
-#content-div >>> p {
-  @apply text-gray-500 mb-4;
+#content-div >>> p,
+#content-div >>> ul {
+  @apply text-gray-500 mb-3;
+}
+
+#content-div >>> ul {
+  @apply list-disc pl-6;
+}
+
+#content-div >>> blockquote > p {
+  @apply mb-0 text-sm;
+}
+
+#content-div >>> blockquote {
+  @apply bg-yellow-100 font-semibold border-l-2 border-yellow-800 px-4 py-3 mb-3;
+}
+
+#content-div >>> pre {
+  @apply pb-3;
 }
 
 #content-div >>> pre > code {
