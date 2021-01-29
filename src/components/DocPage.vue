@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full overflow-y-auto px-6 pb-8 pt-0 sm:pt-2">
+  <div class="h-full w-full overflow-y-auto px-6 pb-8 pt-0 sm:pt-2 doc-page">
     <div class="mx-auto max-w-4xl">
       <div ref="contentDiv" id="content-div" v-html="htmlContent"></div>
     </div>
@@ -32,6 +32,13 @@ export default defineComponent({
           contentDiv.value.querySelectorAll("pre code").forEach(block => {
             hljs.highlightBlock(block);
           });
+          if (!route.hash) {
+            contentDiv.value.closest(".doc-page").scrollTop = 0;
+            return;
+          }
+          [...contentDiv.value.querySelectorAll("h1, h2")]
+            .find(div => div.textContent === route.hash.substring(1))
+            ?.scrollIntoView();
         });
     };
 
