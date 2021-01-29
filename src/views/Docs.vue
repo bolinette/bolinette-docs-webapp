@@ -23,7 +23,7 @@ export default defineComponent({
 
     const fetchPromise = fetchArticles();
 
-    if (!route.params.catchAll) {
+    if (!route.params.article) {
       fetchPromise.then(({ articles }) => {
         router.push({ path: `/docs/${articles[0].name}` });
       });
