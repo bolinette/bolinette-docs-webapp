@@ -79,11 +79,11 @@ export default defineComponent({
 }
 
 #content-div >>> blockquote > p {
-  @apply mb-0 text-sm;
+  @apply mb-0 text-sm text-yellow-700;
 }
 
 #content-div >>> blockquote {
-  @apply bg-yellow-100 font-semibold border-l-2 border-yellow-800 px-4 py-3 mb-3;
+  @apply bg-yellow-100 font-semibold border-l-2 border-yellow-700 px-4 py-3 mb-3;
 }
 
 #content-div >>> pre {
