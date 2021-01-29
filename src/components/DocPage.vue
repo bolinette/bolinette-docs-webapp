@@ -1,28 +1,31 @@
 <template>
   <div class="h-full w-full overflow-y-auto px-6 pb-8 pt-0 sm:pt-2">
     <div class="mx-auto max-w-4xl">
-      <div ref="contentDiv" id="content-div"></div>
+      <div ref="contentDiv" id="content-div" v-html="htmlContent"></div>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, watch, ref, nextTick } from "vue";
+import { defineComponent, ref, nextTick, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import { closeMobileMenu } from "@/composables/mobileMenu";
 import { tag } from "@/composables/articles";
 import hljs from "highlight.js";
+import MarkdownIt from "markdown-it";
 
 export default defineComponent({
   setup() {
     const contentDiv = ref(null);
     const route = useRoute();
+    const md = new MarkdownIt();
+    const htmlContent = ref("");
 
     const fetchPage = url => {
       fetch(url)
         .then(res => res.json())
         .then(json => {
-          contentDiv.value.innerHTML = json.data.html;
+          htmlContent.value = md.render(json.data.markdown);
           return nextTick;
         })
         .then(() => {
@@ -32,23 +35,19 @@ export default defineComponent({
         });
     };
 
-    if (route.params.article) {
+    watchEffect(() => {
+      if (!route.params.article || !tag.value) {
+        return;
+      }
       fetchPage(
         `${process.env.API_URL}/docs/a/en/${tag.value}/${route.params.article}`
       );
-    }
-    watch(
-      () => route.params,
-      newParams => {
-        fetchPage(
-          `${process.env.API_URL}/docs/a/en/${tag.value}/${newParams.article}`
-        );
-        closeMobileMenu();
-      }
-    );
+      closeMobileMenu();
+    });
 
     return {
-      contentDiv
+      contentDiv,
+      htmlContent
     };
   }
 });

@@ -12,6 +12,7 @@
     "@mdi/js": "^5.8.55",
     "core-js": "^3.8.1",
     "highlight.js": "^10.4.1",
+    "markdown-it": "^12.0.4",
     "vue": "^3.0.4",
     "vue-router": "^4.0.1"
   },
