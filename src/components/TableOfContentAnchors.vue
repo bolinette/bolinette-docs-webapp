@@ -42,7 +42,6 @@ export default defineComponent({
     const route = useRoute();
     const isActive = (level: number) => {
       if (level === 1) {
-        console.log(route.params.article, props.page);
         return route.params.article === props.page;
       }
       return false;
