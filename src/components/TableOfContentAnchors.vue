@@ -1,9 +1,12 @@
 <template>
   <div v-for="anchor in anchors" :key="anchor.name" class="anchor">
-    <router-link :to="`/docs/${page}${level > 1 ? `#${anchor.name}` : ''}`">
-      <component :is="`h${level}`" :style="`margin-left: ${0.8 * level}rem`">{{
-        anchor.name
-      }}</component>
+    <router-link :to="getAnchorLink(anchor.name)">
+      <component
+        :is="`h${level}`"
+        :class="{ active: isActive(level) }"
+        :style="`padding-left: ${level}rem`"
+        >{{ anchor.name }}</component
+      >
     </router-link>
     <table-of-content-anchors
       v-if="anchor.children"
@@ -17,6 +20,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { tag } from "@/composables/articles";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "TableOfContentAnchors",
@@ -34,9 +38,26 @@ export default defineComponent({
       required: true
     }
   },
-  setup() {
+  setup(props) {
+    const route = useRoute();
+    const isActive = (level: number) => {
+      if (level === 1) {
+        console.log(route.params.article, props.page);
+        return route.params.article === props.page;
+      }
+      return false;
+    };
+
+    const getAnchorLink = anchorName => {
+      return `/docs/${props.page}${
+        props.level > 1 ? `#${encodeURIComponent(anchorName)}` : ""
+      }`;
+    };
+
     return {
-      tag
+      tag,
+      isActive,
+      getAnchorLink
     };
   }
 });
@@ -49,6 +70,10 @@ export default defineComponent({
 
 .anchor h1 {
   @apply uppercase font-semibold mb-4 sm:mb-0 text-xl sm:text-xs text-gray-800 py-1;
+}
+
+.anchor h1.active {
+  @apply border-l-4 border-red-500 font-bold;
 }
 
 .anchor h2 {
