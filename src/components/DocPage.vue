@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, nextTick, watchEffect } from "vue";
+import { defineComponent, ref, nextTick, watch } from "vue";
 import { useRoute } from "vue-router";
 import { closeMobileMenu } from "@/composables/mobileMenu";
 import { tag } from "@/composables/articles";
@@ -42,15 +42,18 @@ export default defineComponent({
         });
     };
 
-    watchEffect(() => {
-      if (!route.params.article || !tag.value) {
+    const handlePageChange = (article, tag) => {
+      if (!article || !tag) {
         return;
       }
-      fetchPage(
-        `${process.env.API_URL}/docs/a/en/${tag.value}/${route.params.article}`
-      );
+      fetchPage(`${process.env.API_URL}/docs/a/en/${tag}/${article}`);
       closeMobileMenu();
+    };
+
+    watch([() => route.params, tag], ([newParams, newTag]) => {
+      handlePageChange(newParams.article, newTag);
     });
+    handlePageChange(route.params.article, tag.value);
 
     return {
       contentDiv,
